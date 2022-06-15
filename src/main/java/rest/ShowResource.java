@@ -6,6 +6,7 @@ import dto.ShowDTO;
 import repository.ShowRepo;
 import utils.EMF_Creator;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.Column;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
@@ -41,6 +42,7 @@ public class ShowResource {
     }
 //til at lave en guest
     @POST
+    @RolesAllowed("admin")
     @Path("/createshow")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -54,6 +56,7 @@ public class ShowResource {
     }
 //slette et show
     @DELETE
+   // @RolesAllowed("admin")
     @Path("/deleteshow/{showId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

@@ -8,6 +8,7 @@ import repository.GuestRepo;
 import repository.ShowRepo;
 import utils.EMF_Creator;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,6 +31,7 @@ public class GuestResource {
 
 
     @GET
+   // @RolesAllowed("admin")
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllGuests() {
@@ -45,8 +47,8 @@ public class GuestResource {
     @PUT
     @Path("/signup/{guestID}/{showID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response signUpToShow(@PathParam("guestID") int guestID, @PathParam("showID")int showID){
-        ShowDTO update = facade.signGuestToShow(guestID,showID);
+    public Response signUpToShow(@PathParam("guestID") int guestID, @PathParam("showID") int showID) {
+        ShowDTO update = facade.signGuestToShow(guestID, showID);
         return Response
                 .ok()
                 .entity(gson.toJson(update))
@@ -54,11 +56,12 @@ public class GuestResource {
     }
 
     @POST
+    @RolesAllowed("admin")
     @Path("/createguest")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public Response creatShow(String content) {
-       GuestDTO guestDTO= gson.fromJson(content,GuestDTO.class);
+        GuestDTO guestDTO = gson.fromJson(content, GuestDTO.class);
         GuestDTO guestDTO1 = facade.creatGuest(guestDTO);
         return Response
                 .ok()
@@ -69,7 +72,7 @@ public class GuestResource {
     @GET
     @Path("/shows/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response seeAllShowsSignedToGuest(@PathParam("id") int id){
+    public Response seeAllShowsSignedToGuest(@PathParam("id") int id) {
         List<ShowDTO> showDTOs = facade.ShowAllShowsAssignedToo(id);
         return Response
                 .ok()

@@ -39,6 +39,20 @@ public class FestivalRepo {
         return new FestivalDTO(festival);
     }
 
+    public FestivalDTO updateFestival(FestivalDTO festivalDTO) {
+        EntityManager em = getEntityManager();
+        Festival festival = em.find(Festival.class, festivalDTO.getId());
+        if (festival == null) System.out.println("no Festival found");
+        festival.setName(festivalDTO.getName());
+        festival.setCity(festivalDTO.getCity());
+        festival.setDuration(festivalDTO.getDuration());
+        festival.setStartDate(festivalDTO.getStartDate());
+        em.getTransaction().begin();
+        em.merge(festival);
+        em.getTransaction().commit();
+
+        return new FestivalDTO(festival);
+    }
 
 
 }

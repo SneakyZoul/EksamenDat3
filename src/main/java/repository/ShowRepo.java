@@ -53,10 +53,10 @@ public class ShowRepo {
         return new ShowDTO(show);
     }
 
-    public void deleteShow(int showId) {
+    public void deleteShow(int id) {
         EntityManager em = getEntityManager();
         try {
-            Show show = em.find(Show.class, showId);
+            Show show = em.find(Show.class, id);
             if (show == null) System.out.println("no show found");
             em.getTransaction().begin();
             em.remove(show);
