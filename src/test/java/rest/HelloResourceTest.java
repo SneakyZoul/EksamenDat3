@@ -237,14 +237,6 @@
 //                .get("/guest/all").then()
 //                .statusCode(200);
 //    }
-//@Test
-//    public void signingUpToshow(){
-//        given()
-//                .contentType("application/json")
-//                .when()
-//                .get("/guest/signup/{guestID}/{showID}").then()
-//                .statusCode(200);
-//}
 //
 //@Test
 //    public void connectionFestival(){
