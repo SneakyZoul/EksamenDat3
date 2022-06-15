@@ -18,7 +18,7 @@ public class FestivalResource {
     private static final FestivalRepo facade = FestivalRepo.getFestivalRepo(EMF);
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-
+//festival
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoForAll() {
