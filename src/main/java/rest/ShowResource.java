@@ -39,7 +39,7 @@ public class ShowResource {
                 .entity(gson.toJson(showDTOList))
                 .build();
     }
-
+//til at lave en guest
     @POST
     @Path("/createshow")
     @Produces({MediaType.APPLICATION_JSON})
