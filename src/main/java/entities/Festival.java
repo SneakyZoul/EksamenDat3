@@ -1,35 +1,30 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name ="show")
-public class Show {
+@Table(name = "festival")
+public class Festival {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
     private String name;
-    private String duration;
-    private String location;
+    private String city;
     private String startDate;
-    private String startTime;
+    private String duration;
 
-    @ManyToMany
-    Set<Guest> guests = new HashSet<>();
+    @OneToMany(mappedBy = "festival")
+    private Set<Guest> guests = new HashSet<>();
 
-    public Show(){}
+    public Festival(){}
 
-    public Show(String name, String duration, String location, String startDate,String startTime){
+    public Festival(String name, String city, String startDate, String duration){
         this.name = name;
-        this.duration = duration;
-        this.location = location;
+        this.city = city;
         this.startDate = startDate;
-        this.startTime = startTime;
-
+        this.duration = duration;
     }
 
     public int getId() {
@@ -48,20 +43,12 @@ public class Show {
         this.name = name;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getCity() {
+        return city;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStartDate() {
@@ -72,12 +59,12 @@ public class Show {
         this.startDate = startDate;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public Set<Guest> getGuests() {
@@ -87,6 +74,4 @@ public class Show {
     public void setGuests(Set<Guest> guests) {
         this.guests = guests;
     }
-
-
 }
