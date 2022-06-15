@@ -2,14 +2,16 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.ShowDTO;
 import repository.ShowRepo;
 import utils.EMF_Creator;
 
+import javax.persistence.Column;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("show")
 public class ShowResource {
@@ -26,6 +28,42 @@ public class ShowResource {
     }
 
 
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllShows() {
+        List<ShowDTO> showDTOList = facade.getAllShows();
+        if (showDTOList == null) return Response.status(404).build();
+        return Response
+                .ok()
+                .entity(gson.toJson(showDTOList))
+                .build();
+    }
+
+    @POST
+    @Path("/createshow")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response creatShow(String content) {
+        ShowDTO showDTO = gson.fromJson(content, ShowDTO.class);
+        ShowDTO showDTO1 = facade.creatAShow(showDTO);
+        return Response
+                .ok()
+                .entity(gson.toJson(showDTO1))
+                .build();
+    }
+
+    @DELETE
+    @Path("/deleteshow/{showId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteShow(@PathParam("showId") int showId) {
+        facade.deleteShow(showId);
+        return Response
+                .ok()
+                .entity("Deleted")
+                .build();
+    }
 
 }
 

@@ -234,10 +234,27 @@ public class HelloResourceTest {
         given()
                 .contentType("application/json")
                 .when()
-                .get("/show/all").then()
-                .statusCode(401);
+                .get("/guest/all").then()
+                .statusCode(200);
     }
+@Test
+    public void signingUpToshow(){
+        given()
+                .contentType("application/json")
+                .when()
+                .get("/guest/signup/{guestID}/{showID}").then()
+                .statusCode(200);
+}
 
+@Test
+    public void connectionFestival(){
+        given()
+                .contentType("application/json")
+                .when()
+                .get("/festival").then()
+                .statusCode(200)
+                .body("msg", equalTo("Hello Festival"));
+}
 
 
 }

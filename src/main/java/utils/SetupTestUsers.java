@@ -2,6 +2,7 @@ package utils;
 
 
 import entities.Role;
+import entities.Show;
 import entities.User;
 
 import javax.persistence.EntityManager;
@@ -44,6 +45,7 @@ public class SetupTestUsers {
     System.out.println("Testing user with OK password: " + user.verifyPassword("MyPassword"));
     System.out.println("Testing user with wrong password: " + user.verifyPassword("MyPassword"));
     System.out.println("Created TEST Users");
+
    
   }
 

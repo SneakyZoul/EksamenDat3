@@ -89,4 +89,11 @@ public class Guest {
     public void setFestival(Festival festival) {
         this.festival = festival;
     }
+
+public void addShow(Show show){
+        this.shows.add(show);
+        if(!show.getGuests().contains(this)){
+            show.addGuest(this);
+        }
+}
 }

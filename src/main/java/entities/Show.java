@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name ="show")
+@Table(name ="shows")
 public class Show {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,6 +86,13 @@ public class Show {
 
     public void setGuests(Set<Guest> guests) {
         this.guests = guests;
+    }
+
+    public void addGuest(Guest guest){
+        this.guests.add(guest);
+        if(!guest.getShows().contains(this)){
+            guest.addShow(this);
+        }
     }
 
 

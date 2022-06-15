@@ -12,8 +12,7 @@ public class GuestDTO {
     private String phone;
     private String email;
     private String status;
-
-    private int fetivalId;
+    private int festivalId;
 
     public GuestDTO(Guest guest){
         this.id = guest.getId();
@@ -23,7 +22,7 @@ public class GuestDTO {
         this.status = guest.getStatus();
 
         if(guest.getFestival() !=null){
-            this.fetivalId = guest.getFestival().getId();
+            this.festivalId = guest.getFestival().getId();
         }
     }
 
@@ -74,11 +73,11 @@ public class GuestDTO {
     }
 
     public int getFetivalId() {
-        return fetivalId;
+        return festivalId;
     }
 
     public void setFetivalId(int fetivalId) {
-        this.fetivalId = fetivalId;
+        this.festivalId = fetivalId;
     }
 
     @Override
@@ -86,11 +85,11 @@ public class GuestDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GuestDTO guestDTO = (GuestDTO) o;
-        return id == guestDTO.id && fetivalId == guestDTO.fetivalId && Objects.equals(name, guestDTO.name) && Objects.equals(phone, guestDTO.phone) && Objects.equals(email, guestDTO.email) && Objects.equals(status, guestDTO.status);
+        return id == guestDTO.id && festivalId == guestDTO.festivalId && Objects.equals(name, guestDTO.name) && Objects.equals(phone, guestDTO.phone) && Objects.equals(email, guestDTO.email) && Objects.equals(status, guestDTO.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phone, email, status, fetivalId);
+        return Objects.hash(id, name, phone, email, status, festivalId);
     }
 }

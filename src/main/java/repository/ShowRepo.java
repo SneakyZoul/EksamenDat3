@@ -12,8 +12,8 @@ public class ShowRepo {
     private static EntityManagerFactory emf;
     private static ShowRepo instance;
 
-    private ShowRepo(){}
-
+    private ShowRepo() {
+    }
 
 
     public static ShowRepo getShowRepo(EntityManagerFactory _emf) {
@@ -28,15 +28,43 @@ public class ShowRepo {
         return emf.createEntityManager();
     }
 
-    public List<ShowDTO> getAllShows(){
+    public List<ShowDTO> getAllShows() {
         EntityManager em = emf.createEntityManager();
-        try{
-            TypedQuery<Show> query = em.createQuery("SELECT s FROM Show s",Show.class);
+        try {
+            TypedQuery<Show> query = em.createQuery("SELECT s FROM Show s", Show.class);
             List<Show> shows = query.getResultList();
             return ShowDTO.getDtos(shows);
-        }finally {
+        } finally {
             em.close();
         }
     }
+
+    public ShowDTO creatAShow(ShowDTO showDTO) {
+        Show show = new Show(showDTO.getName(), showDTO.getDuration(), showDTO.getLocation(), showDTO.getStartDate(), showDTO.getStartTime());
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(show);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return new ShowDTO(show);
+    }
+
+    public void deleteShow(int showId) {
+        EntityManager em = getEntityManager();
+        try {
+            Show show = em.find(Show.class, showId);
+            if (show == null) System.out.println("no show found");
+            em.getTransaction().begin();
+            em.remove(show);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
 
 }
