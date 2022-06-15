@@ -52,7 +52,7 @@ public class ShowResource {
                 .entity(gson.toJson(showDTO1))
                 .build();
     }
-
+//slette et show
     @DELETE
     @Path("/deleteshow/{showId}")
     @Produces(MediaType.APPLICATION_JSON)
