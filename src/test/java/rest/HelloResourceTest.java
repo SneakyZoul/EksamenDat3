@@ -26,7 +26,7 @@ import utils.EMF_Creator;
 public class HelloResourceTest {
 
     private static final int SERVER_PORT = 7777;
-    private static final String SERVER_URL = "http://localhost/api";
+    private static final String SERVER_URL = "http://localhost:8080/boats_war_exploded/api/";
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -220,5 +220,24 @@ public class HelloResourceTest {
                 .body("code", equalTo(403))
                 .body("message", equalTo("Not authenticated - do login"));
     }
+    @Test
+    public void testPipeline(){
+        given()
+                .contentType("application/json")
+                .when()
+                .get("/show").then()
+                .statusCode(200)
+                .body("msg", equalTo("Hello Shower"));
+    }
+    @Test
+    public void gettingAllOut(){
+        given()
+                .contentType("application/json")
+                .when()
+                .get("/show/all").then()
+                .statusCode(401);
+    }
+
+
 
 }
