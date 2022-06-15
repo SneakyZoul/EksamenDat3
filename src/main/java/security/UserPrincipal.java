@@ -23,7 +23,7 @@ public class UserPrincipal implements Principal {
     this.username = username;
     this.roles = Arrays.asList(roles);
   }
-
+//ok
   @Override
   public String getName() {
     return username;
