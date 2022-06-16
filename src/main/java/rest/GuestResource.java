@@ -31,7 +31,7 @@ public class GuestResource {
 
 
     @GET
-   // @RolesAllowed("admin")
+   @RolesAllowed("admin")
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllGuests() {

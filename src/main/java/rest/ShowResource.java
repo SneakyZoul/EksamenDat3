@@ -56,7 +56,7 @@ public class ShowResource {
     }
 //slette et show
     @DELETE
-   // @RolesAllowed("admin")
+    @RolesAllowed("admin")
     @Path("/deleteshow/{showId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
